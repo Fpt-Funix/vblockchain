@@ -1,7 +1,7 @@
 Module {
 	name: 'vblockchain'
-	description: ''
-	version: ''
-	license: ''
+	description: 'vlang implement POS blockchain'
+	version: '0.1'
+	license: 'GPLv3'
 	dependencies: []
 }
