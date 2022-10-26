@@ -12,10 +12,12 @@ pub fn (blockchain Blockchain) check_chain_validity()  bool {
 		mut block := blockchain.chain[current_index]
 		// check that the hash of the block is correct
 		if block.hash != block.hash() {
+			println('Current hash is not equal to the calculated hash ${block.hash} != ${block.hash()}')
 			return false
 		}
 		// check that previous hash is correct
 		if block.previous_hash != last_block.hash {
+			println(' ${block.previous_hash} != ${last_block.hash}')
 			return false
 		}
 		last_block = block
