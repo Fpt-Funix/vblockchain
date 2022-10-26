@@ -1,12 +1,13 @@
 module main
+import crypto.sha512
 
-struct Block{
+pub struct Block{
 	transactions []Transaction
 	previous_hash string
 	nonce int
 }
 
-struct Transaction {
+pub struct Transaction {
 
 	hash string
 	sender string
@@ -15,6 +16,13 @@ struct Transaction {
 	timestamp int
 }
 
+pub struct Chain{
+	chain []Block
+}
+
+pub fn (b Block) hash() string {
+	return sha512.hexhash(b.transactions.str() + b.previous_hash + b.nonce.str())
+}
     
 
 fn main() {
@@ -40,6 +48,15 @@ fn main() {
 	}
 	println(tx1)
 
+	tx2:=Transaction{
+		hash: '0x1235',
+		sender: '0x4565',
+		recipient: '0x7895',
+		amount: 105,
+		timestamp: 1234567895
+	}
+	println(tx2)
+
 	// Create new Block
 	block:=Block{
 		transactions: [tx, tx1],
@@ -48,4 +65,17 @@ fn main() {
 	}
 
 	println(block)
+
+	block1:=Block{
+		transactions: [tx2],
+		previous_hash: '0x1234',
+		nonce: 1234
+	}
+
+	// Create new Chain
+	chain:=Chain{
+		chain: [block, block1]
+	}
+
+	println(chain)
 }
