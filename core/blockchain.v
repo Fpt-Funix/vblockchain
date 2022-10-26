@@ -2,7 +2,7 @@ module core
 
 // struct definition Blockchain 
 pub struct Blockchain {
-	mut : chain []Block // because we want to add blocks to the chain
+	pub mut : chain []Block // because we want to add blocks to the chain
 	current_transactions []Transaction // list of pending transactions to be added to the next block
 }
 pub fn (blockchain Blockchain) check_chain_validity()  bool {

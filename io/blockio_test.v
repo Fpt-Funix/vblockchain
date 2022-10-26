@@ -49,7 +49,7 @@ fn test_save_then_load_block() {
 
 	}
 	save_block(block0)
-	block_zero := load_block(0)
+	block_zero := load_block(0) or { panic('block not found') }
 	assert block_zero.hash == block0.hash
 	
 }

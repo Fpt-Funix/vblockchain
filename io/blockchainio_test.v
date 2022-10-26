@@ -2,7 +2,10 @@ module io
 
 
 
-
+fn test_load_blockchain()
+{
+	load_blockchain()
+}
 fn test_create_blockchain() {
 
 }

@@ -1,26 +1,27 @@
 module io
-import core {Block,Transaction}
-import os
-import json
-pub fn save_blockchain(block Block) {
+import core {Block,Transaction,Blockchain}
+pub fn save_blockchain(blockchain Blockchain) {
 	
-	 os.write_file('block_${block.index}.txt', json.encode(block)) or {
-		panic(err)
+	for block in blockchain.chain {
+		save_block(block)
 	 }
 	
 }
-pub fn load_blockchain(index int) Block {
+pub fn load_blockchain() Blockchain {
 	
-	if os.exists('block_${index}.txt') {
-		content := os.read_file('block_${index}.txt') or {
-			panic(err)
-		}
-		block := json.decode(Block, content) or {
-			panic(err)
-		}
-		return block
+	mut blockchain:=Blockchain{
+		chain: [],
+		current_transactions: []
 	}
-	panic('block_${index}.txt not found')
+	mut  current := 0
+	for {
+		
+		blockchain.chain << load_block(current) or {
+			break
+		}
+		current++
+	}
+	return blockchain
 	
 	
 }
