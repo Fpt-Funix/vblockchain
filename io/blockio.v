@@ -11,10 +11,10 @@ pub fn save_block(block Block) {
 	 }
 	
 }
-pub fn load_block(index int) Block {
+pub fn load_block(index int) ?Block {
 	
 	if os.exists('data/block_${index}.txt') {
-		content := os.read_file('block_${index}.txt') or {
+		content := os.read_file('data/block_${index}.txt') or {
 			panic(err)
 		}
 		block := json.decode(Block, content) or {
@@ -22,7 +22,7 @@ pub fn load_block(index int) Block {
 		}
 		return block
 	}
-	panic('block_${index}.txt not found')
+	return none
 	
 	
 }
