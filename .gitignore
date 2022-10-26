@@ -7,3 +7,5 @@ vblockchain
 *.dylib
 *.dll
 vls.log
+*.txt
+*.json
