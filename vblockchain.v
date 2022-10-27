@@ -35,7 +35,7 @@ pub fn (mut app Vblockchain) index() vweb.Result {
 ['/block/:id']
 pub fn (mut app Vblockchain) block(id int) vweb.Result {
         lock app.blockchain {
-                return app.text(json.encode(app.blockchain.chain[id]))
+                return app.json(app.blockchain.chain[id])
         }
         return app.text('error')
 }
