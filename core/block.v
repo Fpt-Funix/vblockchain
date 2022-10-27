@@ -9,6 +9,14 @@ pub struct Block{
 	timestamp int
 	pub mut : hash string 
 }
+
 pub fn (b Block) hash() string{
-	return sha512.hexhash(b.previous_hash + b.nonce.str())
+	mut hash_trans := ""
+	// for (var i=0; i<b.transactions.length; i++){
+	for t in b.transactions
+	{
+		hash_trans += t.hash
+		
+	}
+	return sha512.hexhash(b.previous_hash + b.nonce.str()+hash_trans)
 }

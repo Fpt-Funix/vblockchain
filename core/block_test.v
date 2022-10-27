@@ -24,9 +24,9 @@ fn test_create_block0()
 fn test_create_block0_with_hash()
 {
 	tx1:=Transaction{
-		hash: '0x123',
-		sender: '0x456',
-		recipient: '0x789',
+		hash: '0x1232',
+		sender: '0x4562',
+		recipient: '0x7892',
 		amount: 100,
 		timestamp: 1234567890
 	}
@@ -37,7 +37,7 @@ fn test_create_block0_with_hash()
 		timestamp: 1234567890,
 		transactions: [tx1],
 		nonce: 123
-		hash: 'fd8d4de22dc63b44eb3e94d34afc382d4322ce7b137f8ae9946fa540e68e9eadb9685421107341f7edb948b95fb15e3cb44620210aa020998990f5370ade4420'
+		hash: '5c4ccfc7c94b6c37631a9161176bd30b9f89af4ce63beaa191faf063c9856b81a7f9ba509145888e4d02dcdb5537d6077eff3db264a7ba8fff99e5db21660e99'
 
 	}
 	assert block0.hash == block0.hash()

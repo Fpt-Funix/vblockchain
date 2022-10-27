@@ -1,9 +1,16 @@
 module core
 fn test_create_transaction()
 {
-	mut bc:=Blockchain{
-		chain: [],
-		current_transactions: []
+	/*
+	hash string
+	sender string
+	recipient string
+	amount int
+	timestamp int
+	nonce int
+	*/
+	mut t:=Transaction{
+		
 	}
 	tx:=Transaction{
 		hash: '0x123',
