@@ -2,8 +2,7 @@ module core
 import crypto.sha512
 struct MerkleNode{ 
     pub mut : hash string
-    transaction Transaction
-	left &MerkleNode
+   	left &MerkleNode
 	right &MerkleNode
 }
 pub fn (mut node MerkleNode) hash() string {
@@ -17,7 +16,7 @@ struct MerkleTree{
 }
 pub fn create_merkle_node(transaction Transaction) MerkleNode{
 	node:=MerkleNode{
-		transaction: transaction
+		hash: transaction.hash
 	}
 	
 	return node
@@ -38,13 +37,34 @@ pub fn create_merkle_tree(transactions []Transaction) MerkleTree{
 	if transactions.len == 0{
 		error('no transactions')
 	}
-	
+	// loop over transactions and create merkle nodes
+	mut nodes :=[] MerkleNode
+	for transaction in transactions{
+		nodes << create_merkle_node(transaction)
+	}
+	// loop over nodes and add left and right nodes to build merkle tree
+	unsafe {
+		for nodes.len > 1{
+			mut new_nodes :=[] MerkleNode
+			for i:=0; i < nodes.len; i+=2{
+				if i+1 == nodes.len{
+					new_nodes << nodes[i]
+				}else{
+					new_nodes << MerkleNode{
+						left: &nodes[i]
+						right: &nodes[i+1]
+					}
+				}
+			}
+			nodes = new_nodes.clone()
+		}
+	}
 	
 
 
 
 	tree :=MerkleTree{
-		root: create_merkle_node(transactions[0])
+		root: nodes[0]
 	}
 	
 	return tree
