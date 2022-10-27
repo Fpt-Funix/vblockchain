@@ -26,6 +26,7 @@ pub fn (blockchain Blockchain) check_chain_validity()  bool {
 	return true
 }
 
+
 pub fn (blockchain Blockchain) get_block_len()  int {
 	return blockchain.chain.len
 }

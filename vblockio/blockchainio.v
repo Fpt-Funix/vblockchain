@@ -1,11 +1,16 @@
-module io
+module vblockio
 import core {Block,Transaction,Blockchain}
+import os
 pub fn save_blockchain(blockchain Blockchain) {
 	
 	for block in blockchain.chain {
+		println('save block ${block.index}')
 		save_block(block)
 	 }
 	
+}
+pub fn have_data() bool {
+	return os.exists('data')
 }
 pub fn load_blockchain() Blockchain {
 	

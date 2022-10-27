@@ -1,4 +1,4 @@
-module io
+module vblockio
 import core {Block,Transaction}
 import os
 import json
