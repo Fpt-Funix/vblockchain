@@ -4,7 +4,6 @@ import core { Blockchain }
 import vblockio
 import caffe
 import vweb
-import json
 
 const (
         port = 8888
