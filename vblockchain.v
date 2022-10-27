@@ -28,7 +28,7 @@ pub fn (mut app Vblockchain) init() string {
 }
 
 pub fn (mut app Vblockchain) index() vweb.Result {
-        return app.text('Hello world from vweb')
+        return app.text('Hello world from Caffe a Blockchain implement in V')
 }
 
 ['/block/:id']
