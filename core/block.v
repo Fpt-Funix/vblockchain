@@ -16,7 +16,6 @@ pub fn (b Block) hash() string{
 	for t in b.transactions
 	{
 		hash_trans += t.hash
-		
 	}
 	return sha512.hexhash(b.previous_hash + b.nonce.str()+hash_trans)
 }

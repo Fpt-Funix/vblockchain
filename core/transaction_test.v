@@ -1,17 +1,6 @@
 module core
 fn test_create_transaction()
 {
-	/*
-	hash string
-	sender string
-	recipient string
-	amount int
-	timestamp int
-	nonce int
-	*/
-	mut t:=Transaction{
-		
-	}
 	tx:=Transaction{
 		hash: '0x123',
 		sender: '0x456',
@@ -31,6 +20,6 @@ fn test_create_transaction()
 		nonce: 2
 	}
 
-	assert tx1.hash == 'c4f5a5b3ea14132761742af836c503f907e6eba168324864f1b46d4aca15b0a4c376cc68c2dacd632cd80d1d48ef77008323a0c9c6127eaf9c831af584b2695f'
+	assert tx1.hash() == 'c4f5a5b3ea14132761742af836c503f907e6eba168324864f1b46d4aca15b0a4c376cc68c2dacd632cd80d1d48ef77008323a0c9c6127eaf9c831af584b2695f'
 }
 
