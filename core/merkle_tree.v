@@ -15,11 +15,15 @@ struct MerkleTree{
 	root MerkleNode
 }
 pub fn create_merkle_node(transaction Transaction) MerkleNode{
-	node:=MerkleNode{
-		hash: transaction.hash
+	unsafe{
+		node:=MerkleNode{
+			hash: transaction.hash
+			left: nil
+			right: nil
+		}
+		
+		return node
 	}
-	
-	return node
 }
 pub fn create_merkle_tree(transactions []Transaction) MerkleTree{
 	// mut nodes :=[] MerkleNode 
@@ -38,14 +42,14 @@ pub fn create_merkle_tree(transactions []Transaction) MerkleTree{
 		error('no transactions')
 	}
 	// loop over transactions and create merkle nodes
-	mut nodes :=[] MerkleNode
+	mut nodes :=[] MerkleNode{}
 	for transaction in transactions{
 		nodes << create_merkle_node(transaction)
 	}
 	// loop over nodes and add left and right nodes to build merkle tree
 	unsafe {
 		for nodes.len > 1{
-			mut new_nodes :=[] MerkleNode
+			mut new_nodes :=[] MerkleNode{}
 			for i:=0; i < nodes.len; i+=2{
 				if i+1 == nodes.len{
 					new_nodes << nodes[i]

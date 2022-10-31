@@ -50,7 +50,7 @@ pub fn (mut app Vblockchain) total_block() vweb.Result {
 fn main() {
         mut app := Vblockchain{}
         println(app.init())
-
+        
         // turn on when you want to run the server
-        vweb.run(&app, port)
+        //vweb.run(&app, port)
 }
