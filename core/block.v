@@ -11,11 +11,20 @@ pub struct Block{
 }
 
 pub fn (b Block) hash() string{
-	mut hash_trans := ""
+	
 	// for (var i=0; i<b.transactions.length; i++){
-	for t in b.transactions
-	{
-		hash_trans += t.hash
-	}
+
+	// for t in b.transactions
+	// {
+	// 	hash_trans += t.hash
+	// }
+
+	hash_trans	 := b.transactions.map(it.hash).join("") // faster way to do this?
+	// for t in b.transactions
+	// {
+	// 	hash_trans += t.hash
+		
+	// }
+
 	return sha512.hexhash(b.previous_hash + b.nonce.str()+hash_trans)
 }

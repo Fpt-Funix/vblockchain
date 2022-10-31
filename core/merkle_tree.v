@@ -1,17 +1,72 @@
 module core
-
+import crypto.sha512
 struct MerkleNode{ 
-    pub : hash string
-    transaction Transaction
-	left &MerkleNode
+    pub mut : hash string
+   	left &MerkleNode
 	right &MerkleNode
 }
-pub fn (node MerkleNode) hash() string {
+pub fn (mut node MerkleNode) hash() string {
+	node.hash = sha512.hexhash(node.left.hash + node.right.hash)
 	return node.hash
 }
 
 
 struct MerkleTree{
 	root MerkleNode
+}
+pub fn create_merkle_node(transaction Transaction) MerkleNode{
+	node:=MerkleNode{
+		hash: transaction.hash
+	}
+	
+	return node
+}
+pub fn create_merkle_tree(transactions []Transaction) MerkleTree{
+	// mut nodes :=[] MerkleNode 
+	// for transaction in transactions{
+	// 	nodes << create_merkle_node(transaction)
+	// }
+
+	// loop over nodes and add left and right nodes to buil merkle tree
+	if transactions.len == 1{
+		return MerkleTree{
+			root: create_merkle_node(transactions[0])
+		}
+	}
+	
+	if transactions.len == 0{
+		error('no transactions')
+	}
+	// loop over transactions and create merkle nodes
+	mut nodes :=[] MerkleNode
+	for transaction in transactions{
+		nodes << create_merkle_node(transaction)
+	}
+	// loop over nodes and add left and right nodes to build merkle tree
+	unsafe {
+		for nodes.len > 1{
+			mut new_nodes :=[] MerkleNode
+			for i:=0; i < nodes.len; i+=2{
+				if i+1 == nodes.len{
+					new_nodes << nodes[i]
+				}else{
+					new_nodes << MerkleNode{
+						left: &nodes[i]
+						right: &nodes[i+1]
+					}
+				}
+			}
+			nodes = new_nodes.clone()
+		}
+	}
+	
+
+
+
+	tree :=MerkleTree{
+		root: nodes[0]
+	}
+	
+	return tree
 }
  
