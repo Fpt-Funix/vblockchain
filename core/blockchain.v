@@ -2,8 +2,10 @@ module core
 
 // struct definition Blockchain 
 pub struct Blockchain {
-	pub mut : chain []Block // because we want to add blocks to the chain
-	current_transactions []Transaction // list of pending transactions to be added to the next block
+	pub mut : chain []Block  // because we want to add blocks to the chain
+	 current_transactions  []Transaction // list of pending transactions to be added to the next block
+	 queue  []Transaction  // list of transactions that are waiting to be added to the chain
+	 difficult int  // difficulty of the proof of work algorithm
 }
 pub fn (blockchain Blockchain) check_chain_validity()  bool {
 	mut last_block := blockchain.chain[0]
@@ -33,6 +35,38 @@ pub fn (blockchain Blockchain) check_nonce_validity()  bool {
 	return block.hash().starts_with('caffe')
 }
 
+
 pub fn (blockchain Blockchain) get_block_len()  int {
 	return blockchain.chain.len
+
+pub fn (mut blockchain Blockchain) add_new_block(block Block)   {
+	if blockchain.validate_block(block) {
+		blockchain.chain << block
+		return
+	} 
+	blockchain.chain << block
+}
+
+pub fn (blockchain Blockchain) validate_block(block Block,) bool
+{
+	if block.index == 0
+	{
+		if block.previous_hash != '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000caffe'
+		{
+			return false
+		}
+	}
+	else
+	{
+		candicate_hash := block.hash()
+		if candicate_hash.substr(0, 5*blockchain.difficult) == 'caffe'
+		{
+			return true
+		}
+		{
+			return false
+		}
+	}
+	return false
+
 }
