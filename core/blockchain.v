@@ -1,4 +1,5 @@
 module core
+import time
 
 // struct definition Blockchain 
 pub struct Blockchain {
@@ -47,7 +48,6 @@ pub fn (blockchain Blockchain) check_chain_validity_thanh() bool {
 	return true
 }
 
-
 pub fn (blockchain Blockchain) get_block_len()  int {
 	return blockchain.chain.len
 }
@@ -73,3 +73,29 @@ pub fn (blockchain Blockchain) validate_block(block Block) bool {
 pub fn (mut blockchain Blockchain) add_new_transaction(transaction Transaction)  {
 	blockchain.current_transactions << transaction
 }
+
+
+pub fn (mut blockchain Blockchain) validate_none(nonce int)  string {
+	new_block := blockchain.create_next_block(nonce)
+	if blockchain.validate_block(new_block) {
+		blockchain.current_transactions = []Transaction{}
+		blockchain.chain << new_block
+		return 'valid'
+	}
+	return 'invalid'
+}
+
+pub fn (blockchain Blockchain) create_next_block(nonce int)  Block {
+	mut block := Block{
+		index: blockchain.get_block_len() + 1
+		transactions: blockchain.current_transactions
+		previous_hash: blockchain.chain.last().hash
+		nonce: nonce
+		timestamp: int(time.now().unix)
+	}
+	block.hash = block.hash()
+	return block
+}
+
+
+
