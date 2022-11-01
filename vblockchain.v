@@ -72,7 +72,6 @@ pub fn (mut app Vblockchain) submit_transaction() vweb.Result {
 ['/submit_work/:nonce']
 pub fn (mut app Vblockchain) submit_work(nonce int) vweb.Result {
         lock app.blockchain {
-                println(app.blockchain)
                 return app.text(app.blockchain.validate_none(nonce))
         }
         return app.text('error')
