@@ -39,6 +39,14 @@ pub fn (mut app Vblockchain) block(id int) vweb.Result {
         return app.text('error')
 }
 
+['/previous_hash_and_hash_transaction']
+pub fn (mut app Vblockchain) previous_hash_and_hash_transaction() vweb.Result {
+        lock app.blockchain {
+                return app.json(app.blockchain.previous_hash_and_hash_transaction())
+        }
+        return app.text('error')
+}
+
 ['/block']
 pub fn (mut app Vblockchain) total_block() vweb.Result {
         lock app.blockchain {
@@ -50,6 +58,7 @@ pub fn (mut app Vblockchain) total_block() vweb.Result {
 ['/current_transactions']
 pub fn (mut app Vblockchain) current_transactions() vweb.Result {
         lock app.blockchain {
+                println(app.blockchain)
                 return app.json(app.blockchain.current_transactions)
         }
         return app.text('error')

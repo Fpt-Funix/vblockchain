@@ -9,6 +9,11 @@ pub struct Blockchain {
 	 difficulty int = 1  // difficulty of the proof of work algorithm
 }
 
+pub struct CurrnetHash {
+	previous_hash string
+	hash_transaction string
+}
+
 pub fn (blockchain Blockchain) check_chain_validity()  bool {
 	mut last_block := blockchain.chain[0]
 	mut current_index := 1
@@ -97,5 +102,12 @@ pub fn (blockchain Blockchain) create_next_block(nonce int)  Block {
 	return block
 }
 
+pub fn (blockchain Blockchain) previous_hash_and_hash_transaction() CurrnetHash {
+	current_hash := CurrnetHash{
+		previous_hash: blockchain.chain.last().hash
+		hash_transaction: blockchain.current_transactions.map(it.hash()).join('')
+	}
+	return current_hash
+}
 
 
