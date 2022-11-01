@@ -11,7 +11,10 @@ v test .
 ```bash
 v run vblockchain.v
 ```
-
+## run example mine 
+```
+v run mine.v
+```
 ## compile
 
 ```bash
