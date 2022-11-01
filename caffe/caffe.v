@@ -20,6 +20,7 @@ pub fn  init_caffe_blockchain() core.Blockchain{
 	mut caffe:=core.Blockchain{
 		chain: [],
 		current_transactions: []
+		difficulty : 1
 	}
 	// add block 0 to the chain
 	caffe.chain << block0
