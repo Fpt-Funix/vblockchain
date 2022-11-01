@@ -59,21 +59,15 @@ pub fn (mut blockchain Blockchain) add_new_block(block Block)   {
 	}
 }
 
-pub fn (blockchain Blockchain) validate_block(block Block,) bool {
-	
+pub fn (blockchain Blockchain) validate_block(block Block) bool {
 	candicate_hash := block.hash()
 	//println('candicate_hash ${candicate_hash}')
-	if candicate_hash.substr(0, 5*blockchain.difficulty) == 'caffe'
+	if candicate_hash.substr(0, 5 * blockchain.difficulty) == 'caffe'
 	{
 		//println('block is valid')
 		return true
 	}
-	{
-		return false
-	}
-
 	return false
-
 }
 
 pub fn (mut blockchain Blockchain) add_new_transaction(transaction Transaction)  {

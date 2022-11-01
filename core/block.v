@@ -19,12 +19,12 @@ pub fn (b Block) hash() string{
 	// 	hash_trans += t.hash
 	// }
 
-	hash_trans	 := b.transactions.map(it.hash).join("") // faster way to do this?
+	hash_trans := b.transactions.map(it.hash).join("") // faster way to do this?
 	// for t in b.transactions
 	// {
 	// 	hash_trans += t.hash
 		
 	// }
 
-	return sha512.hexhash(b.previous_hash + b.nonce.str()+hash_trans)
+	return sha512.hexhash(b.previous_hash + b.nonce.str() + hash_trans)
 }

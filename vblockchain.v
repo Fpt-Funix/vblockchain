@@ -4,6 +4,7 @@ import core { Blockchain, Transaction }
 import vblockio
 import caffe
 import vweb
+import json
 
 const (
         port = 8888
@@ -54,20 +55,25 @@ pub fn (mut app Vblockchain) current_transactions() vweb.Result {
         return app.text('error')
 }
 
-['/submit_transaction']
+['/submit_transaction'; post]
 pub fn (mut app Vblockchain) submit_transaction() vweb.Result {
-        example_transaction := Transaction{
-		hash: '0x123',
-		sender: '0x456',
-		recipient: '0x789',
-		amount: 100,
-		timestamp: 1234567890
-	}
+        println(app.req.data)
+        transaction := json.decode(Transaction, app.req.data) or {
+                app.set_status(400, '')
+                return app.text('Invalid transaction data, error: ${err}')
+        }
         lock app.blockchain {
-                app.blockchain.add_new_transaction(example_transaction)
+                app.blockchain.add_new_transaction(transaction)
                 return app.text('ok')
         }
         return app.text('error')
+}
+
+['/submit_work/:nonce']
+pub fn (mut app Vblockchain) submit_work(nonce int) vweb.Result {
+        lock app.blockchain {
+        }
+         return app.text('ok')
 }
 
 fn main() {
