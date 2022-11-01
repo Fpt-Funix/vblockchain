@@ -1,6 +1,6 @@
 module main
 
-import core { Blockchain }
+import core { Blockchain, Transaction }
 import vblockio
 import caffe
 import vweb
@@ -11,8 +11,7 @@ const (
 
 pub struct Vblockchain {
         vweb.Context
-pub mut:
-        blockchain shared Blockchain
+        pub mut: blockchain shared Blockchain
 }
 
 pub fn (mut app Vblockchain) init() string {
@@ -47,10 +46,34 @@ pub fn (mut app Vblockchain) total_block() vweb.Result {
         return app.text('error')
 }
 
+['/current_transactions']
+pub fn (mut app Vblockchain) current_transactions() vweb.Result {
+        lock app.blockchain {
+                return app.json(app.blockchain.current_transactions)
+        }
+        return app.text('error')
+}
+
+['/submit_transaction']
+pub fn (mut app Vblockchain) submit_transaction() vweb.Result {
+        example_transaction := Transaction{
+		hash: '0x123',
+		sender: '0x456',
+		recipient: '0x789',
+		amount: 100,
+		timestamp: 1234567890
+	}
+        lock app.blockchain {
+                app.blockchain.add_new_transaction(example_transaction)
+                return app.text('ok')
+        }
+        return app.text('error')
+}
+
 fn main() {
         mut app := Vblockchain{}
         println(app.init())
         
         // turn on when you want to run the server
-        //vweb.run(&app, port)
+        vweb.run(&app, port)
 }

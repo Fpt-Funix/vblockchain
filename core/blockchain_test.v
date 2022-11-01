@@ -54,7 +54,7 @@ fn test_create_blockchain()
 	bc.chain <<  block0
 	bc.chain <<  block1
 	assert bc.check_chain_validity() == true
-
+	assert bc.check_chain_validity() == bc.check_chain_validity_thanh()
 	assert bc.get_block_len() == 2
 	
 }
