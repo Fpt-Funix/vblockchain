@@ -78,10 +78,10 @@ pub fn (mut app Vblockchain) submit_transaction() vweb.Result {
         return app.text('error')
 }
 
-['/submit_work/:nonce']
-pub fn (mut app Vblockchain) submit_work(nonce int) vweb.Result {
+['/submit_work/:nonce/:miner']
+pub fn (mut app Vblockchain) submit_work(nonce int, miner string) vweb.Result {
         lock app.blockchain {
-                return app.text(app.blockchain.validate_none(nonce))
+                return app.text(app.blockchain.validate_none(nonce, miner))
         }
         return app.text('error')
 }

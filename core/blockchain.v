@@ -80,10 +80,12 @@ pub fn (mut blockchain Blockchain) add_new_transaction(transaction Transaction) 
 }
 
 
-pub fn (mut blockchain Blockchain) validate_none(nonce int)  string {
+pub fn (mut blockchain Blockchain) validate_none(nonce int, miner string)  string {
 	new_block := blockchain.create_next_block(nonce)
 	if blockchain.validate_block(new_block) {
 		blockchain.current_transactions = []Transaction{}
+		new_transaction :=  blockchain.create_transaction(miner, nonce)
+		blockchain.current_transactions << new_transaction
 		blockchain.chain << new_block
 		return 'valid'
 	}
@@ -100,6 +102,18 @@ pub fn (blockchain Blockchain) create_next_block(nonce int)  Block {
 	}
 	block.hash = block.hash()
 	return block
+}
+
+pub fn (blockchain Blockchain) create_transaction(miner string, nonce int) Transaction {
+	mut transaction := Transaction{
+		sender: '0x0000000000000000000000000000000000000000'
+		recipient: miner
+		amount: 1
+		timestamp: int(time.now().unix)
+		nonce: nonce
+	}
+	transaction.hash = transaction.hash()
+	return transaction
 }
 
 pub fn (blockchain Blockchain) previous_hash_and_hash_transaction() CurrnetHash {
