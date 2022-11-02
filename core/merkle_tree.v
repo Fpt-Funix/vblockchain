@@ -54,10 +54,13 @@ pub fn create_merkle_tree(transactions []Transaction) MerkleTree{
 				if i+1 == nodes.len{
 					new_nodes << nodes[i]
 				}else{
-					new_nodes << MerkleNode{
+					 node :=MerkleNode{
 						left: &nodes[i]
 						right: &nodes[i+1]
 					}
+					node.hash()
+					new_nodes <<node
+					
 				}
 			}
 			nodes = new_nodes.clone()

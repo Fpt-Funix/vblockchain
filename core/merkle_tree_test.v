@@ -22,7 +22,7 @@ fn test_create_tree() {
 
 	mut transactions:=[]Transaction{}
 	transactions << tx1
-	//transactions << tx2
-	//tree:=create_merkle_tree(transactions)
-	//assert tree.root.hash=="aaa"
+	transactions << tx2
+	tree:=create_merkle_tree(transactions)
+	assert tree.root.hash=="4007e78a560685803d9db06c7f8656d4fbb9c788930ae7a27ce2e314fde3a5d0be82a1309356ee307e127866c4c3477dfc3328c1ab190b580fd7552b30e8143a"
 }
