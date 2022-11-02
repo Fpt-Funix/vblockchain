@@ -2,7 +2,7 @@ module core
 import crypto.sha512
 
 pub struct Transaction {
-	hash string
+	mut: hash string
 	sender string
 	recipient string
 	amount int
