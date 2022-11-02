@@ -62,6 +62,7 @@ pub fn (mut blockchain Blockchain) add_new_block(block Block)   {
 		blockchain.chain << block
 		return
 	}
+	println('Block is not valid')
 }
 
 pub fn (blockchain Blockchain) validate_block(block Block) bool {

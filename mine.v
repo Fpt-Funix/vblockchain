@@ -1,53 +1,41 @@
 module main
 import core {Block,Blockchain,Transaction}
+import caffe
+import time
 fn main() {
 
 
-	blockchain := Blockchain{
-		difficulty: 1
+	mut blockchain := caffe.init_caffe_blockchain()
 
-	}
-
-    tx1:=Transaction{
-		hash: '0x1232',
-		sender: '0x4562',
-		recipient: '0x7892',
-		amount: 100,
-		timestamp: 1234567890
-	}
+	max_value:= 1_000_000_000
 	
-	block0:=Block{
-		index: 0,
-		previous_hash: '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000caffe',
-		timestamp: 1234567890,
-		transactions: [tx1],
-		nonce: 33293
-		hash: ''
-	}
+	for block in 1..100 {
+		begin := time.now()
+		mut counter := 0
+		for i:=0;i<max_value;i++{
+			counter++
+			mut next_block:=Block{
+			index: block,
+			previous_hash: blockchain.chain.last().hash,
+			timestamp: int(time.now().unix),
+			transactions: [],
+			nonce: i
+			hash: ''
 
-
-
-	max_value:= 100_000
-
-
-	for i:=0;i<max_value;i++{
-		mut next_block:=Block{
-		index: 0,
-		previous_hash: '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000caffe',
-		timestamp: 1234567890,
-		transactions: [tx1],
-		nonce: i
-		hash: ''
-
+			}
+			
+			if blockchain.validate_block(next_block){
+				next_block.hash=next_block.hash()
+				next_block.merkle_root_hash = next_block.merkle_root_hash()
+				println(next_block)
+				blockchain.chain<<next_block
+				break
+			}
+			
+			
 		}
-		
-		if blockchain.validate_block(next_block){
-			next_block.hash=next_block.hash()
-			println(next_block)
-			break
-		}
-		
-		
+		end := time.now()
+		println('Time taken for block $block is ${(end-begin).seconds()} your hashrate = ${counter/(end-begin).seconds()}')
 	}
 	
 }

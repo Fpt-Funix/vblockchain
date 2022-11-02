@@ -29,14 +29,21 @@ pub fn create_merkle_tree(transactions []Transaction) MerkleTree{
 	
 
 	// loop over nodes and add left and right nodes to buil merkle tree
-	if transactions.len == 1{
+	if transactions.len == 0 { 
+		transaction:= Transaction{
+			hash: '0x000000000000000000000000000000000'
+			
+		}
 		return MerkleTree{
-			root: create_merkle_node(transactions[0])
+			
+			root: create_merkle_node(transaction)
 		}
 	}
 	
-	if transactions.len == 0{
-		error('no transactions')
+	if transactions.len == 1 {
+		return MerkleTree{
+			root: create_merkle_node(transactions[0])
+		}
 	}
 	// loop over transactions and create merkle nodes
 	mut nodes :=[] MerkleNode{}
