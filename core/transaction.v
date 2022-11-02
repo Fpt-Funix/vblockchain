@@ -17,6 +17,10 @@ pub fn (t Transaction) hash() string{
 	// nonce + from + amount + to + pre
 	return sha512.hexhash(t.nonce.str() + t.sender + t.amount.str() + t.recipient)
 }
+pub fn (t Transaction) validate() {
+	assert t.hash() == t.hash
+
+}
 pub fn (mut t Transaction) sign( private_key string) !string {
 	
 	sig := ed25519.sign(hex.decode(private_key)!, hex.decode(t.hash())!)!
