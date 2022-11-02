@@ -1,6 +1,6 @@
 module caffe
 import core
-
+import vblockio
 pub fn  init_caffe_blockchain() core.Blockchain{
 	tx1:=core.Transaction{
 		hash: '0x123',
@@ -24,6 +24,6 @@ pub fn  init_caffe_blockchain() core.Blockchain{
 	}
 	// add block 0 to the chain
 	caffe.chain << block0
-	
+	vblockio.save_block(block0)
 	return caffe
 }
