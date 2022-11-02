@@ -32,7 +32,3 @@ pub fn generate_key_pair() !(string,string){
 	return hex.encode(public_key), hex.encode(private_key)
 
 }
-
-
-
-	

@@ -26,10 +26,7 @@ pub fn create_merkle_node(transaction Transaction) MerkleNode{
 	}
 }
 pub fn create_merkle_tree(transactions []Transaction) MerkleTree{
-	// mut nodes :=[] MerkleNode 
-	// for transaction in transactions{
-	// 	nodes << create_merkle_node(transaction)
-	// }
+	
 
 	// loop over nodes and add left and right nodes to buil merkle tree
 	if transactions.len == 1{
