@@ -120,7 +120,7 @@ pub fn (blockchain Blockchain) create_transaction(miner string, nonce u64) Trans
 pub fn (blockchain Blockchain) previous_hash_and_hash_transaction() CurrnetHash {
 	current_hash := CurrnetHash{
 		previous_hash: blockchain.chain.last().hash
-		hash_transaction: blockchain.current_transactions.map(it.hash()).join('')
+		hash_transaction: create_merkle_tree(blockchain.current_transactions).root.hash
 	}
 	return current_hash
 }

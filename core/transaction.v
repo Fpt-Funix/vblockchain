@@ -1,7 +1,12 @@
+/*
+This module contains the core functionality of the blockchain.
+*/
 module core
 import crypto.sha512
 import crypto.ed25519
 import encoding.hex
+
+
 
 pub struct Transaction {
 	mut: hash string
