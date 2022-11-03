@@ -2,7 +2,6 @@ module main
 
 import core { Blockchain, Transaction }
 import vblockio
-import caffe
 import vweb
 import json
 
@@ -21,7 +20,7 @@ pub fn (mut app Vblockchain) init() string {
                         app.blockchain = vblockio.load_blockchain()
                         return 'V Blockchain loaded'
                 } else {
-                        app.blockchain = caffe.init_caffe_blockchain()
+                        app.blockchain = core.init_caffe_blockchain()
                         return 'V Blockchain initialized'
                 }
         }
