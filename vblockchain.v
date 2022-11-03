@@ -89,7 +89,5 @@ pub fn (mut app Vblockchain) submit_work(nonce int, miner string) vweb.Result {
 fn main() {
         mut app := Vblockchain{}
         println(app.init())
-        
-        // turn on when you want to run the server
-        vweb.run(&app, port)
+        vweb.run_at(app, vweb.RunParams{   host: 'localhost'       port: port       family: .ip}) or { panic(err) }
 }
