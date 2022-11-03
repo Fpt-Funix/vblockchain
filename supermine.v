@@ -11,6 +11,7 @@ fn main() {
 	
 	max_value:= 1_000_000_000
 	println('Welcome to CaffeBlockchain miner started with $blockchain.chain.last().index  blocks')
+	
 	for block in blockchain.chain.last().index+1..100 {
 		println('Mining block $block')
 		begin := time.now()

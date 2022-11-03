@@ -25,9 +25,9 @@ pub fn create_merkle_node(transaction Transaction) MerkleNode{
 		return node
 	}
 }
+
 pub fn create_merkle_tree(transactions []Transaction) MerkleTree{
 	
-
 	// loop over nodes and add left and right nodes to buil merkle tree
 	if transactions.len == 0 { 
 		transaction:= Transaction{
