@@ -1,11 +1,10 @@
 module main
 import core {Block,Blockchain,Transaction}
-import caffe
 import time
 fn main() {
 
 
-	mut blockchain := caffe.init_caffe_blockchain()
+	mut blockchain := core.init_caffe_blockchain()
 
 	max_value:= 1_000_000_000
 	

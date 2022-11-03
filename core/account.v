@@ -26,3 +26,4 @@ pub fn generate_key_pair() !(string,string){
 	public_key, private_key := ed25519.generate_key()!
 	return hex.encode(public_key), hex.encode(private_key)
 }
+
