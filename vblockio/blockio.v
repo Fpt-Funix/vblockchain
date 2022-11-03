@@ -6,6 +6,7 @@ pub fn save_block(block Block) {
 	if !os.exists('data') {
 		os.mkdir('data') or { panic(err) }
 	}
+	
 	 os.write_file('data/block_${block.index}.txt', json.encode(block)) or {
 		panic(err)
 	 }

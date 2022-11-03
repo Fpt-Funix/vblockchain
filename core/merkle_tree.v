@@ -5,6 +5,7 @@ struct MerkleNode{
    	left &MerkleNode
 	right &MerkleNode
 }
+
 pub fn (mut node MerkleNode) hash() string {
 	node.hash = sha512.hexhash(node.left.hash + node.right.hash)
 	return node.hash
@@ -14,6 +15,7 @@ pub fn (mut node MerkleNode) hash() string {
 struct MerkleTree{
 	root MerkleNode
 }
+
 pub fn create_merkle_node(transaction Transaction) MerkleNode{
 	unsafe{
 		node:=MerkleNode{
@@ -25,6 +27,7 @@ pub fn create_merkle_node(transaction Transaction) MerkleNode{
 		return node
 	}
 }
+
 pub fn create_merkle_tree(transactions []Transaction) MerkleTree{
 	
 
