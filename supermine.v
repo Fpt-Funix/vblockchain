@@ -1,14 +1,14 @@
 module main
 import core {Block,Blockchain,Transaction}
-import caffe
 import time
 import vblockio
 
 fn main() {
-	mut blockchain := if vblockio.have_data() { vblockio.load_blockchain() } else {   caffe.init_caffe_blockchain() }
+	mut blockchain := if vblockio.have_data() { vblockio.load_blockchain() } else {   core.init_caffe_blockchain() }
 	
 	max_value:= 1_000_000_000
 	println('Welcome to CaffeBlockchain miner started with $blockchain.chain.last().index  blocks')
+	
 	for block in blockchain.chain.last().index+1..100 {
 		println('Mining block $block')
 		begin := time.now()
