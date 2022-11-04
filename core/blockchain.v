@@ -77,16 +77,17 @@ pub fn (blockchain Blockchain) validate_block(block Block) bool {
 }
 
 pub fn (mut blockchain Blockchain) add_new_transaction(transaction Transaction)  {
-	blockchain.current_transactions << transaction
+	blockchain.queue << transaction
 }
 
 
 pub fn (mut blockchain Blockchain) validate_none(nonce int, miner string)  string {
 	new_block := blockchain.create_next_block(nonce)
 	if blockchain.validate_block(new_block) {
-		blockchain.current_transactions = []Transaction{}
+		blockchain.current_transactions = blockchain.queue
+		blockchain.queue = []Transaction{}
 		new_transaction :=  blockchain.create_transaction(miner, 1)
-		blockchain.current_transactions << new_transaction
+		blockchain.queue << new_transaction
 		blockchain.chain << new_block
 		return 'valid'
 	}
