@@ -102,6 +102,7 @@ pub fn (blockchain Blockchain) create_next_block(nonce int)  Block {
 		timestamp: int(time.now().unix)
 	}
 	block.hash = block.hash()
+	block.merkle_root_hash = block.merkle_root_hash()
 	return block
 }
 

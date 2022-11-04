@@ -11,7 +11,7 @@ pub struct Block{
 	hash string
 }
 
-pub fn (block &Block) merkle_root_hash() string {
+pub fn (block Block) merkle_root_hash() string {
 	return create_merkle_tree(block.transactions).root.hash
 }
 
