@@ -28,13 +28,7 @@ pub fn load_account_by_public_key(public_key string) ?Account {
 
 pub fn save_account(account Account) {
 	account_file_name := 'data/accounts.json'
-
-	// check account exists
-	// check_account_exists := load_account_by_public_key(account.public_key) or { none }
-	// if check_account_exists != none {
-	// 	return
-	// }
-
+	
 	if !os.exists('data') {
 		os.mkdir('data') or { panic(err) }
 	}

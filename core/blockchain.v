@@ -1,5 +1,6 @@
 module core
 import time
+// import vblockio
 
 // struct definition Blockchain 
 pub struct Blockchain {
@@ -78,6 +79,15 @@ pub fn (blockchain Blockchain) validate_block(block Block) bool {
 
 pub fn (mut blockchain Blockchain) add_new_transaction(transaction Transaction)  {
 	blockchain.queue << transaction
+	// get_recipient_account := load_account_by_public_key(transaction.recipient)
+	// if get_recipient_account == none {
+	// 	account := Account{
+	// 		balance: 0
+	// 		public_key: transaction.recipient
+	// 		nonce: 0
+	// 	}
+	// 	save_account(account)
+	// }
 }
 
 
