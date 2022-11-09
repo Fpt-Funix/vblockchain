@@ -1,0 +1,2 @@
+- name: Create documentation for V modules
+  uses: test-room-7/action-create-v-docs@v0.2.1
