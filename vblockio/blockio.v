@@ -7,15 +7,15 @@ pub fn save_block(block Block) {
 		os.mkdir('data') or { panic(err) }
 	}
 	
-	 os.write_file('data/block_${block.index}.txt', json.encode(block)) or {
+	 os.write_file('data/block_${block.index}.json', json.encode(block)) or {
 		panic(err)
 	 }
 	
 }
 pub fn load_block(index int) ?Block {
 	
-	if os.exists('data/block_${index}.txt') {
-		content := os.read_file('data/block_${index}.txt') or {
+	if os.exists('data/block_${index}.json') {
+		content := os.read_file('data/block_${index}.json') or {
 			panic(err)
 		}
 		block := json.decode(Block, content) or {
