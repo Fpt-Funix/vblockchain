@@ -1,4 +1,4 @@
-module core
+import core {Transaction,create_new_account}
 fn test_create_transaction()
 {
 	account1:=create_new_account()!
@@ -10,7 +10,7 @@ fn test_create_transaction()
 		recipient: account2.public_key,
 		amount: 100,
 		timestamp: 1234567890,
-		nonce: account1.nonce
+		//nonce: account1.nonce
 	}
 	assert tx.nonce == 0
 	tx.hash = tx.hash()

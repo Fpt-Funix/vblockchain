@@ -1,5 +1,4 @@
-module core
-
+import core {Transaction,create_merkle_tree}
 
 fn test_create_tree() {
 	

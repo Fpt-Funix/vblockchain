@@ -7,9 +7,8 @@ import crypto.ed25519
 import encoding.hex
 
 
-
 pub struct Transaction {
-	mut: hash string
+	pub mut: hash string
 	sender string
 	recipient string
 	amount int

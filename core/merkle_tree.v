@@ -12,7 +12,7 @@ pub fn (mut node MerkleNode) hash() string {
 
 
 struct MerkleTree{
-	root MerkleNode
+	pub : root MerkleNode
 }
 pub fn create_merkle_node(transaction Transaction) MerkleNode{
 	unsafe{
