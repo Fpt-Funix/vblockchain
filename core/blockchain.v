@@ -1,5 +1,6 @@
 module core
 import time
+// import vblockio
 
 // struct definition Blockchain 
 pub struct Blockchain {
@@ -77,16 +78,26 @@ pub fn (blockchain Blockchain) validate_block(block Block) bool {
 }
 
 pub fn (mut blockchain Blockchain) add_new_transaction(transaction Transaction)  {
-	blockchain.current_transactions << transaction
+	blockchain.queue << transaction
+	// get_recipient_account := load_account_by_public_key(transaction.recipient)
+	// if get_recipient_account == none {
+	// 	account := Account{
+	// 		balance: 0
+	// 		public_key: transaction.recipient
+	// 		nonce: 0
+	// 	}
+	// 	save_account(account)
+	// }
 }
 
 
 pub fn (mut blockchain Blockchain) validate_none(nonce int, miner string)  string {
 	new_block := blockchain.create_next_block(nonce)
 	if blockchain.validate_block(new_block) {
-		blockchain.current_transactions = []Transaction{}
+		blockchain.current_transactions = blockchain.queue
+		blockchain.queue = []Transaction{}
 		new_transaction :=  blockchain.create_transaction(miner, 1)
-		blockchain.current_transactions << new_transaction
+		blockchain.queue << new_transaction
 		blockchain.chain << new_block
 		return 'valid'
 	}
@@ -102,6 +113,7 @@ pub fn (blockchain Blockchain) create_next_block(nonce int)  Block {
 		timestamp: int(time.now().unix)
 	}
 	block.hash = block.hash()
+	block.merkle_root_hash = block.merkle_root_hash()
 	return block
 }
 

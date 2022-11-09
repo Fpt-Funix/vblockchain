@@ -5,13 +5,13 @@ pub struct Block{
 	pub : index  int
 	transactions []Transaction
 	previous_hash string
-	nonce int	
+	nonce int
 	timestamp int
 	pub mut : merkle_root_hash string
-	hash string 
+	hash string
 }
 
-pub fn (block &Block) merkle_root_hash() string {
+pub fn (block Block) merkle_root_hash() string {
 	return create_merkle_tree(block.transactions).root.hash
 }
 
